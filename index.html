@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hope YoungTeam® — Nationwide Medical Equipment Distribution &amp; Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101833;
+    --ink-soft:#4A5578;
+    --paper:#F6F5FB;
+    --paper-dim:#ECE9F7;
+    --mist:#E3DFF5;
+    --pulse:#7B4FDB;
+    --pulse-dim:#C9B8F0;
+    --gold:#2FC9B5;
+    --line:rgba(16,24,51,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- TOP RIBBON ---------- */
+  .top-ribbon{background:linear-gradient(90deg,#101833,#3B2A72 55%,#1E6E66);color:#F6F5FB;}
+  .top-ribbon-inner{display:flex;align-items:center;justify-content:center;gap:10px;height:36px;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;flex-wrap:wrap;text-align:center;}
+  .top-ribbon .rdot{opacity:0.55;}
+  .reg{font-size:0.55em;color:var(--gold);margin-left:2px;font-weight:600;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,245,251,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .brand{display:flex;flex-direction:column;line-height:1.1;}
+  .brand .name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.15rem;}
+  .brand .tag{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--ink-soft);text-transform:uppercase;margin-top:2px;}
+  .navlinks{display:flex;gap:34px;font-size:0.9rem;font-weight:500;}
+  .navlinks a{text-decoration:none;position:relative;padding-bottom:4px;}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--pulse);transition:width .25s ease;}
+  .navlinks a:hover::after{width:100%;}
+  .navcall{background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:100px;font-size:0.85rem;font-weight:500;text-decoration:none;white-space:nowrap;}
+  @media (max-width:760px){.navlinks{display:none;}}
+
+  /* ---------- HERO ---------- */
+  header.hero{position:relative;padding:96px 0 60px;overflow:hidden;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--pulse);display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--pulse);box-shadow:0 0 0 0 rgba(123,79,219,.6);animation:pulseDot 1.8s infinite;}
+  @keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(123,79,219,.55);}70%{box-shadow:0 0 0 9px rgba(123,79,219,0);}100%{box-shadow:0 0 0 0 rgba(123,79,219,0);}}
+  h1.headline{font-size:clamp(2.3rem,5.6vw,4.1rem);font-weight:700;max-width:820px;}
+  h1.headline em{font-style:normal;color:var(--pulse);}
+  .hero-sub{max-width:560px;margin-top:22px;font-size:1.06rem;color:var(--ink-soft);}
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:100px;font-weight:600;font-size:0.92rem;text-decoration:none;transition:transform .18s ease, box-shadow .18s ease;}
+  .btn-primary{background:var(--ink);color:var(--paper);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,24,51,0.25);}
+  .btn-ghost{border:1.5px solid var(--ink);color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);}
+
+  .ekg-wrap{margin-top:64px;height:120px;position:relative;}
+  .ekg-wrap svg{width:100%;height:100%;display:block;}
+  .ekg-path{fill:none;stroke:var(--pulse);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:1600; stroke-dashoffset:1600; animation:draw 3.2s ease-out forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .ekg-flatline{stroke:var(--line);stroke-width:1.2;}
+
+  /* ---------- STAT STRIP ---------- */
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-dim);}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat{padding:26px 20px;text-align:left;border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;}
+  .stat .num{font-family:'IBM Plex Mono',monospace;font-size:1.5rem;font-weight:500;color:var(--ink);}
+  .stat .lbl{font-size:0.76rem;color:var(--ink-soft);margin-top:4px;text-transform:uppercase;letter-spacing:0.05em;}
+  @media (max-width:700px){.stats .wrap{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(3){border-left:none;}}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:100px 0;}
+  .sec-head{max-width:640px;margin-bottom:64px;}
+  .sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:600;}
+  .sec-head p{margin-top:14px;color:var(--ink-soft);font-size:1rem;max-width:560px;}
+
+  /* ---------- CIRCULATION CHAIN (signature) ---------- */
+  .chain-section{background:var(--ink);color:var(--paper);border-radius:28px;margin:0 20px;position:relative;overflow:hidden;}
+  .chain-section .wrap{max-width:1140px;}
+  .chain-section .sec-head p{color:#B7CBC6;}
+  .chain-section .sec-eyebrow{color:var(--pulse-dim);}
+  .chain-track{position:relative;padding-top:20px;}
+  .chain-line-svg{position:absolute;top:38px;left:0;width:100%;height:60px;z-index:0;}
+  .chain-line{fill:none;stroke:var(--pulse);stroke-width:2;stroke-linecap:round;stroke-dasharray:8 1600;opacity:0.9;}
+  .chain-line.revealed{animation:chainDraw 2.4s ease-out forwards;}
+  @keyframes chainDraw{from{stroke-dasharray:8 1600; stroke-dashoffset:0;}to{stroke-dasharray:1600 1600; stroke-dashoffset:0;}}
+  .chain-nodes{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .node{background:rgba(246,245,251,0.06);border:1px solid rgba(246,245,251,0.16);border-radius:16px;padding:26px 20px;}
+  .node .idx{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--pulse-dim);letter-spacing:0.1em;}
+  .node .beacon{width:12px;height:12px;border-radius:50%;background:var(--pulse);margin:14px 0 16px;box-shadow:0 0 0 4px rgba(123,79,219,0.18);}
+  .node h3{font-size:1.05rem;font-weight:600;margin-bottom:8px;}
+  .node p{font-size:0.86rem;color:#B7CBC6;}
+  @media (max-width:860px){
+    .chain-nodes{grid-template-columns:1fr;}
+    .chain-line-svg{display:none;}
+    .node{border-left:3px solid var(--pulse);}
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;}
+  .service{background:var(--paper);padding:32px 26px;}
+  .service .mono{font-size:0.72rem;color:var(--gold);letter-spacing:0.1em;}
+  .service h3{font-size:1.08rem;font-weight:600;margin:12px 0 8px;}
+  .service p{font-size:0.88rem;color:var(--ink-soft);}
+  @media (max-width:860px){.services-grid{grid-template-columns:1fr;}}
+
+  /* ---------- CONTACT ---------- */
+  .contact-section{background:var(--mist);border-radius:28px;margin:0 20px 40px;}
+  .contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:start;}
+  @media (max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-list{display:flex;flex-direction:column;gap:0;}
+  .cline{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(16,24,51,0.12);align-items:flex-start;}
+  .cline:last-child{border-bottom:none;}
+  .cicon{width:38px;height:38px;border-radius:10px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
+  .clabel{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-soft);margin-bottom:4px;}
+  .cvalue{font-weight:600;font-size:1.02rem;text-decoration:none;}
+  .cvalue:hover{color:var(--pulse);}
+  .csub{font-size:0.84rem;color:var(--ink-soft);margin-top:3px;}
+
+  .card{background:var(--paper);border-radius:18px;padding:30px;border:1px solid rgba(16,24,51,0.1);}
+  .card h3{font-size:1.1rem;font-weight:600;margin-bottom:6px;}
+  .card p.note{font-size:0.86rem;color:var(--ink-soft);margin-bottom:22px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:6px;}
+  .field input,.field textarea,.field select{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid rgba(16,24,51,0.18);background:var(--paper);font-family:'Inter',sans-serif;font-size:0.92rem;color:var(--ink);}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--pulse);}
+  .field textarea{resize:vertical;min-height:90px;}
+  .send-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+  .send-row .btn{flex:1;justify-content:center;}
+  .status-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(123,79,219,0.08);color:var(--pulse);padding:8px 14px;border-radius:100px;font-size:0.8rem;font-weight:600;margin-top:18px;}
+  .status-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--pulse);animation:pulseDot 1.8s infinite;}
+
+  footer{padding:40px 0;border-top:1px solid var(--line);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:0.82rem;color:var(--ink-soft);}
+  footer a{text-decoration:none;font-weight:600;color:var(--ink);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- CATALOGUE ---------- */
+  .cat-intro{max-width:680px;margin-bottom:20px;}
+  .cat-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 8px;}
+  .cat-tabs a{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;padding:9px 16px;border-radius:100px;border:1.5px solid var(--line);text-decoration:none;color:var(--ink-soft);transition:all .2s ease;}
+  .cat-tabs a:hover{border-color:var(--pulse);color:var(--pulse);}
+
+  .note-strip{background:var(--paper-dim);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:44px;}
+  .note-strip .wrap{padding:16px 28px;font-size:0.85rem;color:var(--ink-soft);display:flex;align-items:center;gap:10px;}
+  .note-strip .tag-icon{color:var(--gold);font-weight:700;}
+
+  .cat-section{padding:64px 0;border-bottom:1px solid var(--line);}
+  .cat-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:36px;}
+  .cat-head .idx{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold);letter-spacing:0.12em;margin-bottom:10px;}
+  .cat-head h3.cat-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-0.01em;}
+  .cat-head p{margin-top:8px;color:var(--ink-soft);font-size:0.9rem;max-width:520px;}
+  .cat-count{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--ink-soft);white-space:nowrap;}
+
+  .item-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:900px){.item-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.item-grid{grid-template-columns:1fr;}}
+  .item-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s ease, transform .2s ease;}
+  .item-card:hover{border-color:var(--pulse);transform:translateY(-3px);}
+  .item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .item-card h4{font-size:1rem;font-weight:600;line-height:1.3;font-family:'Space Grotesk',sans-serif;}
+  .item-badge{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.06em;background:var(--mist);color:var(--ink);padding:4px 9px;border-radius:100px;white-space:nowrap;flex-shrink:0;}
+  .item-card p{font-size:0.84rem;color:var(--ink-soft);}
+  .item-enquire{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;color:var(--pulse);text-decoration:none;padding-top:6px;}
+  .item-enquire:hover{text-decoration:underline;}
+
+  .cta-band{background:var(--ink);color:var(--paper);border-radius:28px;margin:20px 20px 0;padding:56px 40px;text-align:center;}
+  .cta-band h2{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:14px;}
+  .cta-band p{color:#B9C2D8;max-width:480px;margin:0 auto 26px;font-size:0.94rem;}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn-ghost-light{border:1.5px solid rgba(246,245,251,0.4);color:var(--paper);}
+  .btn-ghost-light:hover{background:var(--paper);color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="top-ribbon">
+  <div class="wrap top-ribbon-inner">
+    <span>®️ Nationwide Service Provider</span>
+    <span class="rdot">·</span>
+    <span>Medical Equipment &amp; Pharmaceutical Distribution</span>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <span class="name">HOPE YOUNGTEAM<sup class="reg">®</sup></span>
+      <span class="tag">Medical Equipment Distributor · Nationwide</span>
+    </div>
+    <div class="navlinks">
+      <a href="#chain">Circulation Chain</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="navcall" href="tel:+9779707140143">Call +977 970-7140143</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> ALWAYS OPEN — SERVING CLINICS, HOSPITALS &amp; DISTRIBUTORS</div>
+    <h1 class="headline">Medical supply that moves like a <em>pulse</em> — nationwide, without a break.</h1>
+    <p class="hero-sub">Hope YoungTeam sources, holds, and delivers medical equipment and pharmaceutical supplies across Nepal — one continuous chain from manufacturer to point of care.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Start an enquiry</a>
+      <a class="btn btn-ghost" href="https://wa.me/9779707140143" target="_blank" rel="noopener">Message on WhatsApp</a>
+    </div>
+    <div class="ekg-wrap" aria-hidden="true">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <line class="ekg-flatline" x1="0" y1="60" x2="1200" y2="60"/>
+        <path class="ekg-path" d="M0,60 L260,60 L300,60 L320,15 L345,105 L370,60 L420,60 L450,40 L470,60 L900,60 L925,60 L945,25 L965,95 L985,60 L1035,60 L1060,45 L1080,60 L1200,60"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="num">628</div><div class="lbl">Followers</div></div>
+    <div class="stat"><div class="num">5.4K</div><div class="lbl">Network reach</div></div>
+    <div class="stat"><div class="num">43</div><div class="lbl">Field updates</div></div>
+    <div class="stat"><div class="num">3.0</div><div class="lbl">Client reviews</div></div>
+  </div>
+</div>
+
+<section id="chain">
+  <div class="wrap chain-section reveal">
+    <div class="wrap" style="padding:70px 40px;">
+      <div class="sec-head">
+        <div class="sec-eyebrow">The Circulation Chain</div>
+        <h2>Four stages. One uninterrupted flow.</h2>
+        <p>Like a circulatory system, supply doesn't pause at any single point — it moves continuously from source to bedside. This is how Hope YoungTeam keeps it moving.</p>
+      </div>
+      <div class="chain-track">
+        <svg class="chain-line-svg" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true">
+          <path class="chain-line" d="M60,30 L200,30 L220,10 L235,50 L250,30 L390,30 L460,30 L480,10 L495,50 L510,30 L650,30 L720,30 L740,10 L755,50 L770,30 L940,30"/>
+        </svg>
+        <div class="chain-nodes">
+          <div class="node">
+            <div class="idx">STAGE 01</div>
+            <div class="beacon"></div>
+            <h3>Sourcing</h3>
+            <p>Manufacturer and wholesale partnerships, including direct outreach to overseas equipment producers for bulk pricing.</p>
+          </div>
+          <div class="node">
+            <div class="idx">STAGE 02</div>
+            <div class="beacon"></div>
+            <h3>Hope YoungTeam Hub</h3>
+            <p>Central intake in Kathmandu — quality checks, inventory holding, and order consolidation before dispatch.</p>
+          </div>
+          <div class="node">
+            <div class="idx">STAGE 03</div>
+            <div class="beacon"></div>
+            <h3>Regional Distribution</h3>
+            <p>Dispatch to sub-distributors and regional partners across Nepal's provinces, keeping lead times short.</p>
+          </div>
+          <div class="node">
+            <div class="idx">STAGE 04</div>
+            <div class="beacon"></div>
+            <h3>Point of Care</h3>
+            <p>Final delivery, installation support, and after-sales service directly to clinics and hospitals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">What we handle</div>
+      <h2>Built for the full lifecycle of medical supply.</h2>
+      <p>From first contact with a manufacturer to the equipment being unboxed in a ward — each stage is a service, not a hand-off.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service"><div class="mono">01</div><h3>Equipment Supply</h3><p>Diagnostic, surgical, and general clinical equipment sourced and supplied nationwide.</p></div>
+      <div class="service"><div class="mono">02</div><h3>Pharmaceutical Distribution</h3><p>Reliable stock movement of pharmaceutical goods to clinics, hospitals, and retail partners.</p></div>
+      <div class="service"><div class="mono">03</div><h3>Installation &amp; Technical Support</h3><p>On-site setup and technical guidance so equipment is operational from day one.</p></div>
+      <div class="service"><div class="mono">04</div><h3>Nationwide Logistics</h3><p>Dispatch and delivery coordination across Nepal's provinces, urban and remote.</p></div>
+      <div class="service"><div class="mono">05</div><h3>Wholesale Partnerships</h3><p>Bulk supply terms for distributors and institutional buyers.</p></div>
+      <div class="service"><div class="mono">06</div><h3>After-Sales Service</h3><p>Ongoing support, replacement parts, and maintenance coordination post-delivery.</p></div>
+    </div>
+    <div style="margin-top:32px;">
+      <a class="btn btn-primary" href="#catalogue">Browse full equipment catalogue →</a>
+    </div>
+  </div>
+</section>
+
+<section id="catalogue">
+  <div class="wrap">
+    <div class="sec-head cat-intro reveal">
+      <div class="sec-eyebrow">The Catalogue</div>
+      <h2>Everything moving through the chain.</h2>
+      <p>From diagnostic tools to hospital furniture — product lines we regularly source and supply to clinics, hospitals, and distributors across Nepal.</p>
+      <div class="cat-tabs">
+        <a href="#diagnostic">Diagnostic &amp; Monitoring</a>
+        <a href="#surgical">Surgical &amp; Clinical</a>
+        <a href="#furniture">Hospital Furniture &amp; Mobility</a>
+        <a href="#emergency">Respiratory &amp; Emergency</a>
+        <a href="#consumables">Consumables &amp; PPE</a>
+        <a href="#pharma">Pharmaceutical</a>
+        <a href="#rehab">Rehabilitation &amp; Home Care</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-strip">
+    <div class="wrap"><span class="tag-icon">●</span> Prices and stock levels on request — this catalogue reflects product lines we regularly supply, not fixed pricing. Contact us for a quote.</div>
+  </div>
+
+  <div class="wrap">
+    <div class="cat-section reveal" id="diagnostic">
+      <div class="cat-head">
+        <div>
+          <div class="idx">CATEGORY 01</div>
+          <h3 class="cat-title">Diagnostic &amp; Monitoring Equipment</h3>
+          <p>Instruments for routine checks and continuous patient monitoring.</p>
+        </div>
+        <div class="cat-count">6 product lines</div>
+      </div>
+      <div class="item-grid">
+        <div class="item-card"><div class="item-top"><h4>Digital Blood Pressure Monitors</h4><span class="item-badge">Clinic / Home</span></div><p>Automatic upper-arm and wrist models for clinical and home monitoring use.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Pulse Oximeters</h4><span class="item-badge">Portable</span></div><p>Fingertip SpO₂ and pulse-rate monitors for wards, clinics, and home care.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>ECG Machines</h4><span class="item-badge">3 / 6 / 12-lead</span></div><p>Electrocardiograph units for cardiac screening in clinics and hospitals.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Patient Monitors</h4><span class="item-badge">Multi-parameter</span></div><p>Bedside monitors tracking vitals — heart rate, SpO₂, BP, and temperature.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Infrared &amp; Digital Thermometers</h4><span class="item-badge">Bulk supply</span></div><p>Non-contact and digital thermometers for clinical and institutional use.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Glucometers &amp; Test Strips</h4><span class="item-badge">Consumable</span></div><p>Blood glucose monitoring kits with compatible strip supply.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+      </div>
+    </div>
+
+    <div class="cat-section reveal" id="surgical">
+      <div class="cat-head">
+        <div>
+          <div class="idx">CATEGORY 02</div>
+          <h3 class="cat-title">Surgical &amp; Clinical Equipment</h3>
+          <p>Instruments and fixed equipment for operating rooms and procedure suites.</p>
+        </div>
+        <div class="cat-count">5 product lines</div>
+      </div>
+      <div class="item-grid">
+        <div class="item-card"><div class="item-top"><h4>Surgical Instrument Sets</h4><span class="item-badge">Reusable</span></div><p>Standard and specialty surgical kits sourced from vetted manufacturers.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Operating Tables</h4><span class="item-badge">Manual / Hydraulic</span></div><p>Adjustable OT tables for general and specialty surgical procedures.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Surgical Lights</h4><span class="item-badge">LED</span></div><p>Ceiling-mounted and mobile LED lighting for procedure and operating rooms.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Autoclaves &amp; Sterilizers</h4><span class="item-badge">Institutional</span></div><p>Steam sterilization units sized for clinics through to hospital departments.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Suction Machines</h4><span class="item-badge">Portable / Fixed</span></div><p>Medical suction units for surgical and emergency use.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+      </div>
+    </div>
+
+    <div class="cat-section reveal" id="furniture">
+      <div class="cat-head">
+        <div>
+          <div class="idx">CATEGORY 03</div>
+          <h3 class="cat-title">Hospital Furniture &amp; Mobility</h3>
+          <p>Ward furniture and patient-transport equipment for daily hospital operations.</p>
+        </div>
+        <div class="cat-count">5 product lines</div>
+      </div>
+      <div class="item-grid">
+        <div class="item-card"><div class="item-top"><h4>Hospital Beds</h4><span class="item-badge">Manual / Electric</span></div><p>Adjustable ward beds, ICU beds, and electric-profile beds.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Wheelchairs</h4><span class="item-badge">Standard / Reclining</span></div><p>Manual and reclining wheelchairs for hospital and home use.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Stretchers &amp; Trolleys</h4><span class="item-badge">Emergency / Transport</span></div><p>Patient-transport trolleys for wards, ambulances, and emergency units.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Bedside Lockers &amp; Overbed Tables</h4><span class="item-badge">Ward furniture</span></div><p>Storage and dining furniture fitted for hospital ward layouts.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>IV Stands</h4><span class="item-badge">Mobile</span></div><p>Height-adjustable infusion stands on castors.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+      </div>
+    </div>
+
+    <div class="cat-section reveal" id="emergency">
+      <div class="cat-head">
+        <div>
+          <div class="idx">CATEGORY 04</div>
+          <h3 class="cat-title">Respiratory &amp; Emergency Care</h3>
+          <p>Life-support and emergency-response equipment for critical care.</p>
+        </div>
+        <div class="cat-count">5 product lines</div>
+      </div>
+      <div class="item-grid">
+        <div class="item-card"><div class="item-top"><h4>Oxygen Concentrators</h4><span class="item-badge">5L / 10L</span></div><p>Continuous-flow oxygen concentrators for clinical and home care.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Nebulizers</h4><span class="item-badge">Compressor</span></div><p>Compressor nebulizers for respiratory therapy in clinics and at home.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Ventilators</h4><span class="item-badge">ICU-grade</span></div><p>Invasive and non-invasive ventilation units for critical care units.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Defibrillators</h4><span class="item-badge">AED / Manual</span></div><p>Automated external and manual defibrillators for emergency response.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>First-Aid &amp; Emergency Kits</h4><span class="item-badge">Bulk supply</span></div><p>Stocked first-aid kits for institutional and ambulance use.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+      </div>
+    </div>
+
+    <div class="cat-section reveal" id="consumables">
+      <div class="cat-head">
+        <div>
+          <div class="idx">CATEGORY 05</div>
+          <h3 class="cat-title">Consumables &amp; PPE</h3>
+          <p>Recurring-order supplies for daily clinical use.</p>
+        </div>
+        <div class="cat-count">5 product lines</div>
+      </div>
+      <div class="item-grid">
+        <div class="item-card"><div class="item-top"><h4>Examination &amp; Surgical Gloves</h4><span class="item-badge">Bulk / Wholesale</span></div><p>Latex and nitrile gloves supplied in bulk to institutions and distributors.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Masks &amp; Respirators</h4><span class="item-badge">Bulk / Wholesale</span></div><p>Surgical masks and N95-type respirators for clinical settings.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Syringes &amp; Needles</h4><span class="item-badge">Consumable</span></div><p>Disposable syringes and needles in standard clinical sizes.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Gauze, Bandages &amp; Dressings</h4><span class="item-badge">Consumable</span></div><p>Wound-care consumables for wards and outpatient departments.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Disinfectants &amp; Sanitizers</h4><span class="item-badge">Institutional</span></div><p>Surface and hand disinfectants supplied at institutional volumes.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+      </div>
+    </div>
+
+    <div class="cat-section reveal" id="pharma">
+      <div class="cat-head">
+        <div>
+          <div class="idx">CATEGORY 06</div>
+          <h3 class="cat-title">Pharmaceutical Products</h3>
+          <p>Distribution of essential and over-the-counter pharmaceutical lines, subject to regulatory compliance.</p>
+        </div>
+        <div class="cat-count">3 product lines</div>
+      </div>
+      <div class="item-grid">
+        <div class="item-card"><div class="item-top"><h4>Essential Medicines</h4><span class="item-badge">Licensed supply</span></div><p>Core pharmaceutical stock distributed to licensed pharmacies and hospitals.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Over-the-Counter Products</h4><span class="item-badge">Retail / Wholesale</span></div><p>OTC pharmaceutical and health products for retail and institutional buyers.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Cold-Chain Products</h4><span class="item-badge">Temperature-controlled</span></div><p>Cold-chain logistics for temperature-sensitive pharmaceutical goods.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+      </div>
+    </div>
+
+    <div class="cat-section reveal" id="rehab" style="border-bottom:none;">
+      <div class="cat-head">
+        <div>
+          <div class="idx">CATEGORY 07</div>
+          <h3 class="cat-title">Rehabilitation &amp; Home Care</h3>
+          <p>Equipment for recovery, mobility support, and long-term home care.</p>
+        </div>
+        <div class="cat-count">4 product lines</div>
+      </div>
+      <div class="item-grid">
+        <div class="item-card"><div class="item-top"><h4>Walking Aids</h4><span class="item-badge">Canes / Walkers</span></div><p>Adjustable canes, crutches, and walking frames.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Physiotherapy Equipment</h4><span class="item-badge">Clinical</span></div><p>Basic physiotherapy and rehabilitation-support equipment for clinics.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Home-Care Beds</h4><span class="item-badge">Manual / Electric</span></div><p>Adjustable beds designed for long-term home care use.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+        <div class="item-card"><div class="item-top"><h4>Commode Chairs</h4><span class="item-badge">Home care</span></div><p>Bedside commode chairs for mobility-limited patients.</p><a class="item-enquire" href="#contact">Enquire →</a></div>
+      </div>
+    </div>
+
+    <div class="cta-band reveal">
+      <h2>Need something outside this list?</h2>
+      <p>Hope YoungTeam® sources on request — tell us the equipment and volume you need, and we'll quote it through our supply chain.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Request a quote</a>
+        <a class="btn btn-ghost-light" href="https://wa.me/9779707140143" target="_blank" rel="noopener">WhatsApp: +977 970-7140143</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-section reveal">
+    <div class="wrap" style="padding:64px 40px;">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Get in touch</div>
+        <h2>For business enquiries only.</h2>
+        <p>Reach the Hope YoungTeam desk directly — for wholesale terms, equipment sourcing, or partnership enquiries.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-list">
+          <div class="cline">
+            <div class="cicon">☎</div>
+            <div>
+              <div class="clabel">Phone</div>
+              <a class="cvalue" href="tel:+9779707140143">+977 970-7140143</a>
+              <div class="csub">Available for calls during business hours</div>
+            </div>
+          </div>
+          <div class="cline">
+            <div class="cicon">◎</div>
+            <div>
+              <div class="clabel">Location</div>
+              <div class="cvalue">Kathmandu, Nepal</div>
+              <div class="csub">Central hub for nationwide dispatch</div>
+            </div>
+          </div>
+          <div class="cline">
+            <div class="cicon">@</div>
+            <div>
+              <div class="clabel">Instagram</div>
+              <a class="cvalue" href="https://instagram.com/hopeyoungteam.inc" target="_blank" rel="noopener">hopeyoungteam.inc</a>
+              <div class="csub">Product updates and dispatch highlights</div>
+            </div>
+          </div>
+          <div class="cline">
+            <div class="cicon">✉</div>
+            <div>
+              <div class="clabel">Enquiries</div>
+              <div class="cvalue">Message for business enquiries only</div>
+              <div class="csub">Equipment sourcing, wholesale &amp; distribution partnerships</div>
+            </div>
+          </div>
+          <div class="status-badge"><span class="dot"></span> Always open</div>
+        </div>
+
+        <div class="card">
+          <h3>Send an enquiry</h3>
+          <p class="note">This opens a pre-filled email to Hope YoungTeam — no account needed.</p>
+          <form id="enquiryForm">
+            <div class="field">
+              <label for="fname">Your name</label>
+              <input id="fname" type="text" placeholder="Full name" required>
+            </div>
+            <div class="field">
+              <label for="forg">Organisation</label>
+              <input id="forg" type="text" placeholder="Clinic, hospital, or distributor name">
+            </div>
+            <div class="field">
+              <label for="ftype">Enquiry type</label>
+              <select id="ftype">
+                <option>Equipment sourcing</option>
+                <option>Pharmaceutical distribution</option>
+                <option>Wholesale / bulk partnership</option>
+                <option>Technical support</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fmsg">Message</label>
+              <textarea id="fmsg" placeholder="What do you need?" required></textarea>
+            </div>
+            <div class="send-row">
+              <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;">Send enquiry</button>
+              <a class="btn btn-ghost" href="https://wa.me/9779707140143" target="_blank" rel="noopener">WhatsApp instead</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hope YoungTeam<sup class="reg">®</sup> · Nationwide Service Provider · Medical Equipment Distributor, Nepal</span>
+    <a href="#contact">Business enquiries →</a>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Animate the circulation chain line once visible
+  const chainLine = document.querySelector('.chain-line');
+  const chainSection = document.querySelector('.chain-section');
+  const chainIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ chainLine.classList.add('revealed'); chainIo.disconnect(); }
+    });
+  },{threshold:0.3});
+  if(chainSection) chainIo.observe(chainSection);
+
+  // Mailto form submit
+  document.getElementById('enquiryForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('fname').value;
+    const org = document.getElementById('forg').value;
+    const type = document.getElementById('ftype').value;
+    const msg = document.getElementById('fmsg').value;
+    const subject = encodeURIComponent('Business enquiry: ' + type);
+    const body = encodeURIComponent('Name: ' + name + '\nOrganisation: ' + org + '\nEnquiry type: ' + type + '\n\nMessage:\n' + msg);
+    window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+  });
+</script>
+
+</body>
+</html>
